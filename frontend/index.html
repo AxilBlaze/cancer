@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>CSV → JSON Converter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Breast Cancer Relapse Pipeline</p>
+          <h1>Convert high-dimensional CSVs into top-200 JSON payloads.</h1>
+          <p>
+            This frontend uploads a CSV to the existing FastAPI endpoint defined
+            in <code>convert.py</code>. The server extracts the top 200 features
+            (using <code>feature_index.pkl</code>) and returns a ready-to-send
+            JSON body for the prediction service.
+          </p>
+        </div>
+        <section class="status-card">
+          <h2>Quick Start</h2>
+          <ol>
+            <li>Install deps: <code>pip install -r ../requirements.txt</code></li>
+            <li>Run server: <code>uvicorn convert:app --port 8001</code></li>
+            <li>Open this page (any static server works)</li>
+          </ol>
+        </section>
+      </header>
+
+      <section class="panel">
+        <h2>1. Configure API target</h2>
+        <p>
+          Update the API base URL if your FastAPI server is hosted elsewhere.
+        </p>
+        <label class="field">
+          <span>API URL</span>
+          <input
+            id="apiUrl"
+            name="apiUrl"
+            type="text"
+            value="http://localhost:8001"
+            autocomplete="off"
+          />
+        </label>
+      </section>
+
+      <section class="panel">
+        <h2>2. Upload CSV & Convert</h2>
+        <form id="convertForm">
+          <label class="field file-field">
+            <span>CSV File</span>
+            <input id="csvFile" name="csvFile" type="file" accept=".csv" />
+          </label>
+          <button type="submit">Convert to JSON</button>
+        </form>
+        <div id="formMessage" class="form-message" role="status"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>3. Result</h2>
+          <div class="panel-actions">
+            <button id="downloadBtn" disabled>Download output.json</button>
+            <button id="copyBtn" disabled>Copy JSON</button>
+          </div>
+        </div>
+        <pre id="resultPreview" class="code-block">// Converted JSON will appear here</pre>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Conversion Log</h2>
+          <button id="clearLogBtn" class="ghost">Clear</button>
+        </div>
+        <ul id="logList" class="log-list"></ul>
+      </section>
+    </main>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
+
+
