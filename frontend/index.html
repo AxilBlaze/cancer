@@ -16,17 +16,16 @@
           <p class="eyebrow">Breast Cancer Relapse Pipeline</p>
           <h1>Convert high-dimensional CSVs into top-200 JSON payloads.</h1>
           <p>
-            This frontend uploads a CSV to <code>convert.py</code>, which extracts the top 200 features
-            and automatically sends them to <code>server.py</code> for prediction. The complete result
-            including prediction is displayed below.
+            This frontend uploads a CSV to the combined server, which extracts the top 200 features
+            and automatically generates predictions. The complete result including prediction is displayed below.
           </p>
         </div>
         <section class="status-card">
           <h2>Quick Start</h2>
           <ol>
             <li>Install deps: <code>pip install -r ../requirements.txt</code></li>
-            <li>Run server: <code>uvicorn convert:app --port 8001</code></li>
-            <li>Open this page (any static server works)</li>
+            <li>Run server: <code>uvicorn combined_server:app --port 8000</code></li>
+            <li>Open this page via a local web server (not file://). Use: <code>python -m http.server 8080</code> in the frontend folder, then open <code>http://localhost:8080</code></li>
           </ol>
         </section>
       </header>
@@ -42,7 +41,7 @@
             id="apiUrl"
             name="apiUrl"
             type="text"
-            value="http://localhost:8001"
+            value="http://localhost:8000"
             autocomplete="off"
           />
         </label>

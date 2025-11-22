@@ -66,3 +66,22 @@
 2025-11-22 21:46:03,775 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
 2025-11-22 21:46:22,796 INFO Incoming predict request from 127.0.0.1
 2025-11-22 21:46:22,799 INFO Prediction result: {"timestamp": 1763828182.798995, "client": "127.0.0.1", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 22:10:02,931 INFO Loaded linear_svc_model.joblib
+2025-11-22 22:10:02,932 INFO Loaded sgd_svm_model.joblib
+2025-11-22 22:10:02,932 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 22:10:02,932 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 22:24:34,323 INFO Loaded linear_svc_model.joblib
+2025-11-22 22:24:34,324 INFO Loaded sgd_svm_model.joblib
+2025-11-22 22:24:34,324 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 22:24:34,324 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 22:26:48,852 INFO Prediction result: {"timestamp": 1763830608.8520424, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 22:28:43,053 INFO Loaded linear_svc_model.joblib
+2025-11-22 22:28:43,054 INFO Loaded sgd_svm_model.joblib
+2025-11-22 22:28:43,054 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 22:28:43,054 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 22:29:21,863 INFO Prediction result: {"timestamp": 1763830761.8638349, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 22:30:36,360 INFO Loaded linear_svc_model.joblib
+2025-11-22 22:30:36,361 INFO Loaded sgd_svm_model.joblib
+2025-11-22 22:30:36,361 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 22:30:36,361 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 22:30:58,337 INFO Prediction result: {"timestamp": 1763830858.3375046, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}

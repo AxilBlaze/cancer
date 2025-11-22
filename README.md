@@ -8,17 +8,20 @@ This project processes gene expression data with ~24,000 features and extracts t
 
 ## Architecture
 
-- **Website Component** (`convert.py`): Converts CSV files with 24k+ features to JSON format with 200 selected features, then automatically forwards to prediction server
-- **IoT Device Component** (`server.py`): Runs prediction API server that processes the 200 features and returns risk predictions
+- **Combined Server** (`combined_server.py`): Single FastAPI server that handles both CSV conversion and prediction
+  - Converts CSV files with 24k+ features to JSON format with 200 selected features
+  - Runs prediction models (Linear SVC and SGD SVM) to generate risk assessments
+  - All functionality in one server for simplified deployment
+
+**Note**: The original `convert.py` and `server.py` files are deprecated and have been merged into `combined_server.py`. They are kept for reference only.
 
 ## Workflow
 
-1. **User uploads CSV** → Website sends to `convert.py`
-2. **convert.py** → Extracts 200 features from CSV
-3. **convert.py** → Automatically sends features to `server.py` for prediction
-4. **server.py** → Returns prediction result
-5. **convert.py** → Returns combined result (features + prediction) to website
-6. **Website** → Displays prediction results to user
+1. **User uploads CSV** → Frontend sends to `combined_server.py`
+2. **combined_server.py** → Extracts 200 features from CSV
+3. **combined_server.py** → Runs prediction models directly (no HTTP call needed)
+4. **combined_server.py** → Returns combined result (features + prediction) to frontend
+5. **Frontend** → Displays prediction results to user
 
 ## Prerequisites
 

@@ -117,7 +117,11 @@ form.addEventListener("submit", async (event) => {
 
   try {
     const { file, apiUrl } = validateInputs();
-    const endpoint = new URL("/convert", apiUrl).toString();
+    
+    // Ensure apiUrl doesn't have trailing slash
+    const baseUrl = apiUrl.replace(/\/+$/, "");
+    const endpoint = `${baseUrl}/convert`;
+    
     const formData = new FormData();
     formData.append("file", file);
 
@@ -141,17 +145,27 @@ form.addEventListener("submit", async (event) => {
       setMessage("Conversion and prediction successful!", "success");
       pushLog(`Prediction: ${payload.prediction.risk_percent?.toFixed(2)}% risk, will relapse: ${payload.prediction.will_relapse}`);
     } else if (payload.status === "conversion_success_prediction_failed") {
-      setMessage("Features extracted, but prediction failed. Check server.py connection.", "error");
+      setMessage("Features extracted, but prediction failed. Check server logs for details.", "error");
       pushLog("Conversion succeeded but prediction failed.", true);
     } else {
       setMessage("Conversion successful.", "success");
       pushLog("Conversion succeeded.");
     }
   } catch (error) {
-    console.error(error);
+    console.error("Fetch error:", error);
     resetResult();
-    setMessage(error.message, "error");
-    pushLog(error.message, true);
+    
+    // Provide more helpful error messages
+    let errorMessage = error.message;
+    if (error.message === "Failed to fetch" || error.message.includes("fetch")) {
+      const serverUrl = apiInput.value.trim();
+      errorMessage = `Failed to connect to server at ${serverUrl}. ` +
+        `Make sure: (1) Server is running (check http://localhost:8000/health), ` +
+        `(2) You're not opening this page as a file:// URL (use a local web server instead)`;
+    }
+    
+    setMessage(errorMessage, "error");
+    pushLog(errorMessage, true);
   }
 });
 
