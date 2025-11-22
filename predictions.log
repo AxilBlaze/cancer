@@ -32,3 +32,37 @@
 2025-11-20 15:03:15,625 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
 2025-11-20 15:05:43,084 INFO Incoming predict request from 127.0.0.1
 2025-11-20 15:05:43,088 INFO Prediction result: {"timestamp": 1763631343.088503, "client": "127.0.0.1", "risk_percent": 18.11285240210301, "will_relapse": false}
+2025-11-22 21:27:50,348 INFO Loaded linear_svc_model.joblib
+2025-11-22 21:27:50,349 INFO Loaded sgd_svm_model.joblib
+2025-11-22 21:27:50,349 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 21:27:50,350 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 21:35:20,376 INFO Loaded linear_svc_model.joblib
+2025-11-22 21:35:20,377 INFO Loaded sgd_svm_model.joblib
+2025-11-22 21:35:20,377 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 21:35:20,377 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 21:38:06,431 INFO Loaded linear_svc_model.joblib
+2025-11-22 21:38:06,432 INFO Loaded sgd_svm_model.joblib
+2025-11-22 21:38:06,432 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 21:38:06,432 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 21:38:49,235 INFO Incoming predict request from 127.0.0.1
+2025-11-22 21:38:49,245 INFO Prediction result: {"timestamp": 1763827729.2451599, "client": "127.0.0.1", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 21:41:18,202 INFO Loaded linear_svc_model.joblib
+2025-11-22 21:41:18,204 INFO Loaded sgd_svm_model.joblib
+2025-11-22 21:41:18,204 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 21:41:18,205 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 21:41:40,968 INFO Incoming predict request from 127.0.0.1
+2025-11-22 21:41:40,971 INFO Prediction result: {"timestamp": 1763827900.971157, "client": "127.0.0.1", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 21:41:56,480 INFO Incoming predict request from 127.0.0.1
+2025-11-22 21:41:56,483 INFO Prediction result: {"timestamp": 1763827916.4833045, "client": "127.0.0.1", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 21:43:56,736 INFO Loaded linear_svc_model.joblib
+2025-11-22 21:43:56,737 INFO Loaded sgd_svm_model.joblib
+2025-11-22 21:43:56,737 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 21:43:56,737 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 21:44:28,362 INFO Incoming predict request from 127.0.0.1
+2025-11-22 21:44:28,366 INFO Prediction result: {"timestamp": 1763828068.3658946, "client": "127.0.0.1", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 21:46:03,773 INFO Loaded linear_svc_model.joblib
+2025-11-22 21:46:03,774 INFO Loaded sgd_svm_model.joblib
+2025-11-22 21:46:03,774 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 21:46:03,775 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 21:46:22,796 INFO Incoming predict request from 127.0.0.1
+2025-11-22 21:46:22,799 INFO Prediction result: {"timestamp": 1763828182.798995, "client": "127.0.0.1", "risk_percent": 13.447106149454715, "will_relapse": false}

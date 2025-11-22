@@ -16,10 +16,9 @@
           <p class="eyebrow">Breast Cancer Relapse Pipeline</p>
           <h1>Convert high-dimensional CSVs into top-200 JSON payloads.</h1>
           <p>
-            This frontend uploads a CSV to the existing FastAPI endpoint defined
-            in <code>convert.py</code>. The server extracts the top 200 features
-            (using <code>feature_index.pkl</code>) and returns a ready-to-send
-            JSON body for the prediction service.
+            This frontend uploads a CSV to <code>convert.py</code>, which extracts the top 200 features
+            and automatically sends them to <code>server.py</code> for prediction. The complete result
+            including prediction is displayed below.
           </p>
         </div>
         <section class="status-card">
@@ -61,9 +60,14 @@
         <div id="formMessage" class="form-message" role="status"></div>
       </section>
 
+      <section class="panel" id="predictionPanel" style="display: none;">
+        <h2>3. Prediction Result</h2>
+        <div id="predictionResult" class="prediction-result"></div>
+      </section>
+
       <section class="panel">
         <div class="panel-header">
-          <h2>3. Result</h2>
+          <h2>4. Full JSON Result</h2>
           <div class="panel-actions">
             <button id="downloadBtn" disabled>Download output.json</button>
             <button id="copyBtn" disabled>Copy JSON</button>

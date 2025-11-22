@@ -1,6 +1,7 @@
 # convert_api.py
 from fastapi import FastAPI, File, UploadFile, HTTPException, Request
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import pandas as pd
 import joblib
@@ -8,15 +9,29 @@ import numpy as np
 import time
 import os
 import json
+import requests
 from typing import List, Optional
 
 app = FastAPI(title="CSV -> Top200 Extractor API")
+
+# Add CORS middleware to allow frontend requests
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, replace with specific origins like ["http://localhost:8080"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Path where a feature_index.pkl might be stored (adjust if needed)
 MODEL_FOLDER = "./"
 FEATURE_INDEX_PATH = os.path.join(MODEL_FOLDER, "feature_index.pkl")
 DATA_CSV_PATH = os.path.join(MODEL_FOLDER, "data.csv")
 OUTPUT_JSON_PATH = os.path.join(MODEL_FOLDER, "output.json")
+
+# Server.py configuration (IoT device prediction API)
+SERVER_URL = os.environ.get("SERVER_URL", "http://localhost:8000")
+SERVER_API_KEY = os.environ.get("SERVER_API_KEY", "changeme")
 
 # Default desired K
 TOP_K = 200
@@ -113,6 +128,51 @@ def extract_by_index_list(row: pd.Series, feature_index: List[str], tolerate_cas
 
     return numeric
 
+def call_prediction_server(gene_features: List[float]) -> dict:
+    """
+    Calls server.py prediction API with extracted gene features.
+    Returns prediction result or raises HTTPException on error.
+    """
+    try:
+        headers = {
+            "Content-Type": "application/json",
+            "X-API-Key": SERVER_API_KEY
+        }
+        payload = {
+            "gene_features": gene_features
+        }
+        
+        response = requests.post(
+            f"{SERVER_URL}/predict",
+            headers=headers,
+            json=payload,
+            timeout=30  # 30 second timeout
+        )
+        
+        if response.status_code != 200:
+            error_detail = response.json().get("detail", f"Server returned status {response.status_code}")
+            raise HTTPException(
+                status_code=502,
+                detail=f"Prediction server error: {error_detail}"
+            )
+        
+        return response.json()
+    except requests.exceptions.ConnectionError:
+        raise HTTPException(
+            status_code=503,
+            detail=f"Could not connect to prediction server at {SERVER_URL}. Make sure server.py is running."
+        )
+    except requests.exceptions.Timeout:
+        raise HTTPException(
+            status_code=504,
+            detail="Prediction server request timed out."
+        )
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(
+            status_code=502,
+            detail=f"Error communicating with prediction server: {str(e)}"
+        )
+
 @app.post("/convert")
 async def convert_csv(file: UploadFile = File(...)):
     """
@@ -165,13 +225,28 @@ async def convert_csv(file: UploadFile = File(...)):
     if len(gene_features) != TOP_K:
         raise HTTPException(status_code=500, detail=f"Extraction returned {len(gene_features)} values, expected {TOP_K}")
 
-    # Build response
+    # Build initial payload with extracted features
     sample_id = f"uploaded-{int(time.time())}"
     payload = {
         "sample_id": sample_id,
         "feature_version": "v1_top200",
         "gene_features": gene_features
     }
+
+    # Call prediction server (server.py)
+    try:
+        prediction_result = call_prediction_server(gene_features)
+        # Combine conversion and prediction results
+        payload["prediction"] = prediction_result
+        payload["status"] = "success"
+    except HTTPException as he:
+        # If prediction fails, still return the extracted features but with error status
+        payload["prediction"] = None
+        payload["status"] = "conversion_success_prediction_failed"
+        payload["prediction_error"] = he.detail
+        # Re-raise to return error response, or comment out to return partial success
+        # For now, we'll return partial success so user gets the features even if prediction fails
+        # raise he
 
     return JSONResponse(content=payload)
 

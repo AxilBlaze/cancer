@@ -8,8 +8,17 @@ This project processes gene expression data with ~24,000 features and extracts t
 
 ## Architecture
 
-- **Website Component** (`convert.py`): Converts CSV files with 24k+ features to JSON format with 200 selected features
+- **Website Component** (`convert.py`): Converts CSV files with 24k+ features to JSON format with 200 selected features, then automatically forwards to prediction server
 - **IoT Device Component** (`server.py`): Runs prediction API server that processes the 200 features and returns risk predictions
+
+## Workflow
+
+1. **User uploads CSV** → Website sends to `convert.py`
+2. **convert.py** → Extracts 200 features from CSV
+3. **convert.py** → Automatically sends features to `server.py` for prediction
+4. **server.py** → Returns prediction result
+5. **convert.py** → Returns combined result (features + prediction) to website
+6. **Website** → Displays prediction results to user
 
 ## Prerequisites
 
@@ -61,6 +70,15 @@ This project processes gene expression data with ~24,000 features and extracts t
   }
   ```
 
+**Configuration**:
+- `SERVER_URL`: URL of server.py (default: `http://localhost:8000`)
+- `SERVER_API_KEY`: API key for server.py (default: `changeme`)
+- Set via environment variables:
+  ```bash
+  export SERVER_URL="http://your-iot-device-ip:8000"
+  export SERVER_API_KEY="your-api-key"
+  ```
+
 **Usage**:
 
 1. **As a standalone script**:
@@ -75,10 +93,23 @@ This project processes gene expression data with ~24,000 features and extracts t
    ```
    
    **API Endpoints**:
-   - `POST /convert`: Upload CSV file and get JSON response
+   - `POST /convert`: Upload CSV file, extract features, get prediction, and return combined result
      ```bash
      curl -X POST "http://localhost:8001/convert" \
           -F "file=@data.csv"
+     ```
+     Returns:
+     ```json
+     {
+       "sample_id": "uploaded-1234567890",
+       "feature_version": "v1_top200",
+       "gene_features": [<200 values>],
+       "prediction": {
+         "risk_percent": 65.23,
+         "will_relapse": true
+       },
+       "status": "success"
+     }
      ```
    - `GET /health`: Health check endpoint
      ```bash
@@ -305,11 +336,32 @@ id,Contig42006_RC,AB033032,U45975,...
 
 ---
 
-## Workflow
+## Complete Prediction Pipeline
 
-### Complete Prediction Pipeline
+### Automated Workflow (Recommended)
 
-1. **Prepare Data** (Website):
+1. **Start Prediction Server** (IoT Device):
+   ```bash
+   uvicorn server:app --host 0.0.0.0 --port 8000
+   ```
+
+2. **Start Converter Server** (Website):
+   ```bash
+   # Set server URL if different from default
+   export SERVER_URL="http://your-iot-device-ip:8000"
+   export SERVER_API_KEY="changeme"
+   
+   uvicorn convert:app --host 0.0.0.0 --port 8001
+   ```
+
+3. **Upload CSV via Website**:
+   - Open `frontend/index.html` in a browser
+   - Upload CSV file
+   - Get complete result (features + prediction) automatically
+
+### Manual Workflow (Alternative)
+
+1. **Prepare Data**:
    ```bash
    # Place your CSV file as data.csv
    # Run converter

@@ -7,6 +7,8 @@ const downloadBtn = document.getElementById("downloadBtn");
 const copyBtn = document.getElementById("copyBtn");
 const logList = document.getElementById("logList");
 const clearLogBtn = document.getElementById("clearLogBtn");
+const predictionPanel = document.getElementById("predictionPanel");
+const predictionResult = document.getElementById("predictionResult");
 
 let latestPayload = null;
 
@@ -25,12 +27,65 @@ const setMessage = (text, type = "") => {
   messageEl.className = `form-message ${type}`;
 };
 
+const renderPrediction = (payload) => {
+  if (payload.prediction) {
+    const pred = payload.prediction;
+    const riskPercent = pred.risk_percent?.toFixed(2) || "N/A";
+    const willRelapse = pred.will_relapse;
+    const riskColor = willRelapse ? "#ef4444" : "#10b981";
+    
+    predictionResult.innerHTML = `
+      <div class="prediction-card" style="border-left: 4px solid ${riskColor};">
+        <div class="prediction-header">
+          <h3>Risk Assessment</h3>
+          <span class="risk-badge" style="background-color: ${riskColor}20; color: ${riskColor};">
+            ${willRelapse ? "HIGH RISK" : "LOW RISK"}
+          </span>
+        </div>
+        <div class="prediction-details">
+          <div class="prediction-item">
+            <span class="label">Risk Percentage:</span>
+            <span class="value" style="color: ${riskColor}; font-weight: bold; font-size: 1.2em;">
+              ${riskPercent}%
+            </span>
+          </div>
+          <div class="prediction-item">
+            <span class="label">Will Relapse:</span>
+            <span class="value" style="color: ${riskColor}; font-weight: bold;">
+              ${willRelapse ? "Yes" : "No"}
+            </span>
+          </div>
+        </div>
+      </div>
+    `;
+    predictionPanel.style.display = "block";
+  } else if (payload.prediction_error) {
+    predictionResult.innerHTML = `
+      <div class="prediction-card" style="border-left: 4px solid #f59e0b;">
+        <div class="prediction-header">
+          <h3>Prediction Unavailable</h3>
+        </div>
+        <div class="prediction-details">
+          <p style="color: #f59e0b;">${payload.prediction_error}</p>
+          <p style="font-size: 0.9em; color: #6b7280; margin-top: 0.5em;">
+            Features were extracted successfully, but prediction server could not be reached.
+          </p>
+        </div>
+      </div>
+    `;
+    predictionPanel.style.display = "block";
+  } else {
+    predictionPanel.style.display = "none";
+  }
+};
+
 const renderJSON = (payload) => {
   latestPayload = payload;
   const formatted = JSON.stringify(payload, null, 2);
   resultPreview.textContent = formatted;
   downloadBtn.disabled = false;
   copyBtn.disabled = false;
+  renderPrediction(payload);
 };
 
 const resetResult = () => {
@@ -38,6 +93,7 @@ const resetResult = () => {
   resultPreview.textContent = "// Converted JSON will appear here";
   downloadBtn.disabled = true;
   copyBtn.disabled = true;
+  predictionPanel.style.display = "none";
 };
 
 const validateInputs = () => {
@@ -65,7 +121,7 @@ form.addEventListener("submit", async (event) => {
     const formData = new FormData();
     formData.append("file", file);
 
-    setMessage("Uploading and converting…");
+    setMessage("Uploading CSV, extracting features, and getting prediction…");
     pushLog(`Uploading ${file.name} to ${endpoint}`);
 
     const response = await fetch(endpoint, {
@@ -80,8 +136,17 @@ form.addEventListener("submit", async (event) => {
 
     const payload = await response.json();
     renderJSON(payload);
-    setMessage("Conversion successful.", "success");
-    pushLog("Conversion succeeded.");
+    
+    if (payload.prediction) {
+      setMessage("Conversion and prediction successful!", "success");
+      pushLog(`Prediction: ${payload.prediction.risk_percent?.toFixed(2)}% risk, will relapse: ${payload.prediction.will_relapse}`);
+    } else if (payload.status === "conversion_success_prediction_failed") {
+      setMessage("Features extracted, but prediction failed. Check server.py connection.", "error");
+      pushLog("Conversion succeeded but prediction failed.", true);
+    } else {
+      setMessage("Conversion successful.", "success");
+      pushLog("Conversion succeeded.");
+    }
   } catch (error) {
     console.error(error);
     resetResult();
