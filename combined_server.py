@@ -22,8 +22,11 @@ app = FastAPI(title="CSV Converter & Prediction API")
 # For development, allow all origins. In production, specify exact origins.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for development
-    allow_credentials=True,
+    allow_origins=[
+        "https://capstone-group-213.vercel.app",  # Your production frontend
+        "http://localhost:5173",  # Optional: if using Vite locally
+    ],  # In production, replace with specific origins like ["http://localhost:8080"]
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
