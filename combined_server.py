@@ -26,8 +26,9 @@ origins = [
     "https://capstone-group-213.vercel.app/",
     "https://capstone-group-213.vercel.app/convert",
     "http://localhost:5173",
-    "http://localhost:5173/"
-    "http://localhost:5173/convert"
+    "http://localhost:5173/",
+    "http://localhost:5173/convert",
+    "*"
 ]
 
 app.add_middleware(
