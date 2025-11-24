@@ -85,3 +85,38 @@
 2025-11-22 22:30:36,361 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
 2025-11-22 22:30:36,361 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
 2025-11-22 22:30:58,337 INFO Prediction result: {"timestamp": 1763830858.3375046, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 22:34:12,935 INFO Loaded linear_svc_model.joblib
+2025-11-22 22:34:12,937 INFO Loaded sgd_svm_model.joblib
+2025-11-22 22:34:12,937 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-22 22:34:12,937 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-22 22:40:16,168 INFO Prediction result: {"timestamp": 1763831416.1679103, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 22:41:45,310 INFO Prediction result: {"timestamp": 1763831505.3107393, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 22:44:14,988 INFO Prediction result: {"timestamp": 1763831654.9880364, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 22:51:02,571 INFO Prediction result: {"timestamp": 1763832062.5713646, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 22:54:10,741 INFO Prediction result: {"timestamp": 1763832250.7417486, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 22:54:30,129 INFO Prediction result: {"timestamp": 1763832270.129121, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:05:29,647 INFO Prediction result: {"timestamp": 1763832929.6476622, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:06:10,628 INFO Prediction result: {"timestamp": 1763832970.6282616, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:06:56,355 INFO Prediction result: {"timestamp": 1763833016.3549302, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:07:52,336 INFO Prediction result: {"timestamp": 1763833072.3360374, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:11:23,877 INFO Prediction result: {"timestamp": 1763833283.8771777, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:11:59,271 INFO Prediction result: {"timestamp": 1763833319.2709827, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:14:43,677 INFO Prediction result: {"timestamp": 1763833483.6777215, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:14:49,623 INFO Prediction result: {"timestamp": 1763833489.6234224, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:14:57,438 INFO Prediction result: {"timestamp": 1763833497.4386795, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:19:26,970 INFO Prediction result: {"timestamp": 1763833766.9699504, "client": "csv_upload", "risk_percent": 13.447119100928223, "will_relapse": false}
+2025-11-22 23:19:40,857 INFO Prediction result: {"timestamp": 1763833780.8571804, "client": "csv_upload", "risk_percent": 13.447119100928223, "will_relapse": false}
+2025-11-22 23:22:02,227 INFO Prediction result: {"timestamp": 1763833922.227236, "client": "csv_upload", "risk_percent": 90.21894695194706, "will_relapse": true}
+2025-11-22 23:22:14,556 INFO Prediction result: {"timestamp": 1763833934.556703, "client": "csv_upload", "risk_percent": 13.447119100928223, "will_relapse": false}
+2025-11-22 23:23:53,276 INFO Prediction result: {"timestamp": 1763834033.276133, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:32:52,514 INFO Prediction result: {"timestamp": 1763834572.5142136, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:33:00,035 INFO Prediction result: {"timestamp": 1763834580.035519, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:41:17,098 INFO Prediction result: {"timestamp": 1763835077.0981576, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:44:59,373 INFO Prediction result: {"timestamp": 1763835299.3738637, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:47:23,298 INFO Prediction result: {"timestamp": 1763835443.2987645, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-22 23:51:58,078 INFO Prediction result: {"timestamp": 1763835718.0782292, "client": "csv_upload", "risk_percent": 90.21894695194706, "will_relapse": true}
+2025-11-23 01:40:19,437 INFO Loaded linear_svc_model.joblib
+2025-11-23 01:40:19,437 INFO Loaded sgd_svm_model.joblib
+2025-11-23 01:40:19,437 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-23 01:40:19,437 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-23 01:43:20,409 INFO Prediction result: {"timestamp": 1763842400.4091303, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
