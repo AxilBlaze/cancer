@@ -17,7 +17,10 @@ app = FastAPI(title="CSV -> Top200 Extractor API")
 # Add CORS middleware to allow frontend requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins like ["http://localhost:8080"]
+    allow_origins=[
+        "https://capstone-group-213.vercel.app",  # Your production frontend
+        "http://localhost:5173",  # Optional: if using Vite locally
+    ],  # In production, replace with specific origins like ["http://localhost:8080"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
