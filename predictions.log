@@ -120,3 +120,12 @@
 2025-11-23 01:40:19,437 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
 2025-11-23 01:40:19,437 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
 2025-11-23 01:43:20,409 INFO Prediction result: {"timestamp": 1763842400.4091303, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}
+2025-11-24 13:37:45,280 INFO Loaded linear_svc_model.joblib
+2025-11-24 13:37:45,282 INFO Loaded sgd_svm_model.joblib
+2025-11-24 13:37:45,282 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-24 13:37:45,282 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-24 13:39:02,312 INFO Loaded linear_svc_model.joblib
+2025-11-24 13:39:02,313 INFO Loaded sgd_svm_model.joblib
+2025-11-24 13:39:02,313 INFO Loaded artifacts. Feature length = 200. Models loaded: linear_svc, sgd_svm
+2025-11-24 13:39:02,313 INFO label_encoder.pkl not found; using fallback labels: ['class_0', 'class_1']
+2025-11-24 13:39:35,566 INFO Prediction result: {"timestamp": 1763971775.5660045, "client": "csv_upload", "risk_percent": 13.447106149454715, "will_relapse": false}

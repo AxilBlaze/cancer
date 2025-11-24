@@ -19,21 +19,9 @@ import logging
 app = FastAPI(title="CSV Converter & Prediction API")
 
 # CORS middleware - allow frontend requests
-origins = [
-    "http://localhost",
-    "http://localhost:3000",
-    "https://capstone-group-213.vercel.app",
-    "https://capstone-group-213.vercel.app/",
-    "https://capstone-group-213.vercel.app/convert",
-    "http://localhost:5173",
-    "http://localhost:5173/",
-    "http://localhost:5173/convert",
-    "*"
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
