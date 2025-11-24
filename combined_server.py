@@ -22,7 +22,7 @@ app = FastAPI(title="CSV Converter & Prediction API")
 # For development, allow all origins. In production, specify exact origins.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins for development
+    allow_origin_regex=".*",  # Allow all origins for development (regex required for credentials)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
